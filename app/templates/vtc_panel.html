@@ -1,0 +1,41 @@
+{% extends 'skin.html' %}
+{% load static %}
+{% block head_body %}
+    <link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cairo" rel="stylesheet">
+    <link href="{% static 'css/timeline.css' %}" rel="stylesheet">
+{% endblock %}
+{% load widget_tweaks %}
+{% block breadcrumb %}
+{% endblock %}
+{% block content %}
+    <div class="container py-5">
+        <div class="row text-center mb-1">
+            <div class="col-lg-8 mx-auto">
+                <h1 class="display-4 title">{{ comp.name }}</h1>
+                <p class="lead mb-0 desc">{{ comp.address }}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-7 mx-auto">
+                <ul class="timeline">
+                    <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
+                        <div class="timeline-arrow"></div>
+                        <h2 class="h5 mb-0">Misión</h2>
+                        <p class="text-small mt-2 font-weight-light">{{ comp.mission }}</p>
+                    </li>
+                    <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
+                        <div class="timeline-arrow"></div>
+                        <h2 class="h5 mb-0">Visión</h2>
+                        <p class="text-small mt-2 font-weight-light">{{ comp.vision }}</p>
+                    </li>
+                    <li class="timeline-item bg-white rounded ml-3 p-4 shadow">
+                        <div class="timeline-arrow"></div>
+                        <h2 class="h5 mb-0">Acerca de nosotros</h2>
+                        <p class="text-small mt-2 font-weight-light">{{ comp.about_us }}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

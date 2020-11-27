@@ -1,0 +1,62 @@
+{% extends 'list.html' %}
+{% load static %}
+{% block head_list %}
+
+    <link rel="stylesheet" href="{% static 'lib/bootstrap-touchspin-v4.2.5/css/jquery.bootstrap-touchspin.css' %}"/>
+    <script src="{% static 'lib/bootstrap-touchspin-v4.2.5/js/jquery.bootstrap-touchspin.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'lib/formvalidation-dist-v1.6.0/dist/css/formValidation.min.css' %}">
+    <script src="{% static 'lib/formvalidation-dist-v1.6.0/es6-shim.min.js' %}"></script>
+    <script src="{% static 'lib/formvalidation-dist-v1.6.0/dist/js/FormValidation.min.js' %}"></script>
+    <script src="{% static 'lib/formvalidation-dist-v1.6.0/dist/js/plugins/Bootstrap.min.js' %}"></script>
+    <script src="{% static 'lib/formvalidation-dist-v1.6.0/dist/js/locales/es_ES.min.js' %}"></script>
+
+    <script src="{% static 'vehicle/client/js/list.js' %}"></script>
+{% endblock %}
+
+{% block columns %}
+    <th>Cliente</th>
+    <th>Placa</th>
+    <th>Año</th>
+    <th>Modelo</th>
+    <th>Marca</th>
+    <th>Kilometraje actual</th>
+    <th>Opciones</th>
+{% endblock %}
+
+{% block rows %}
+
+{% endblock %}
+
+{% block javascript_list %}
+    <div id="myModalKmCurrent" class="modal fade" role="dialog">
+        <form class="form" id="frmKmCurrent" method="POST">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"><b><i class="fa fa-plus"></i> Actualización del kilometraje</b>
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <input type="hidden" value="0" id="cta">
+                            <div class="form-group">
+                                <label>KM Actual:</label>
+                                <input type="text" class="form-control" name="km_current" autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success btn-flat btn-block">
+                            <i class="fas fa-save"></i> Guardar Pago
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+{% endblock %}

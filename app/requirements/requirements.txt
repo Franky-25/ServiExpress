@@ -1,0 +1,14 @@
+asgiref==3.2.3
+Django==3.0.3
+django-crum==0.7.5
+django-widget-tweaks==1.4.5
+html5lib==1.1
+Pillow==7.0.0
+PyPDF2==1.26.0
+pytz==2019.3
+reportlab==3.5.46
+six==1.15.0
+sqlparse==0.3.1
+webencodings==0.5.1
+xhtml2pdf==0.2.4
+cx-Oracle==8.0.0

@@ -1,0 +1,36 @@
+{% extends 'report.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block head_report %}
+    <script src="{% static 'salary_report/js/report.js' %}" type="text/javascript"></script>
+{% endblock %}
+{% block content_report %}
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label>Semana de pago:</label>
+                {{ form.date_joined }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <hr>
+            <table class="table table-bordered table-md" id="tblReport" width="100%">
+                <thead>
+                <tr>
+                    <th>Empleado</th>
+                    <th>Cargo</th>
+                    <th>Semana</th>
+                    <th>Salario semanal</th>
+                    <th>Días trabajados</th>
+                    <th>Descuentos</th>
+                    <th>Bonificaciones</th>
+                    <th>Total a recibir</th>
+                </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

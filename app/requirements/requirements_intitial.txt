@@ -1,0 +1,5 @@
+para el correcto funcionamiento de la aplicacion web primero en consola se debe buscar la ruta del sistema.
+elegir en config.bd la base de datos a ocupar y llegar con los datos requeridos,
+en config.settings configurar la base de datos a eleccion
+aplicar las migraciones correspondientes por consola,
+correr el test para crear los modulos necesarios.

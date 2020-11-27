@@ -1,0 +1,12 @@
+// EXPORTAR UNA BASE DE DATOS
+python manage.py dumpdata --indent 2 > deploy/backup.json
+
+// RESTAURAR UNA BASE DE DATOS
+python manage.py loaddata backup.json
+
+// RESET INCREMENT SQLITE
+sqlite3 nombre_base
+delete from auth_permission;
+delete from sqlite_sequence where name='auth_permission';
+delete from django_content_type;
+delete from sqlite_sequence where name='django_content_type';

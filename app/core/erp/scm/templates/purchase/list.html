@@ -1,0 +1,103 @@
+{% extends 'list.html' %}
+{% load static %}
+
+{% block head_list %}
+<script src="{% static 'purchase/js/list.js' %}"></script>
+{% endblock %}
+
+{% block columns %}
+<th style="width: 10%;" class="text-center">Nro</th>
+<th style="width: 15%;">Proveedor</th>
+<th style="width: 10%;">rut</th>
+<th style="width: 15%;">Forma de Pago</th>
+<th style="width: 20%;">Fec. de registro</th>
+<th style="width: 15%;">Total a pagar</th>
+<th style="width: 15%;" class="text-center">Opciones</th>
+{% endblock %}
+
+{% block rows %}
+{% for i in object_list %}
+<tr>
+    <td>{{ i.id }}</td>
+    <td>{{ i.prov.name }}</td>
+    <td>{{ i.prov.rut }}</td>
+    <td class="text-center">
+        <span
+            class="badge {% if i.payment == 'contado' %}badge-primary{% else %}badge-danger{% endif %}">{{ i.get_payment_display }}</span>
+    </td>
+    <td>{{ i.date_joined }}</td>
+    <td class="text-center">${{ i.total }}</td>
+    <td class="text-center">
+        <a rel="details" data-toggle="tooltip" title="Ver detalles" class="btn btn-success btn-xs btn-flat">
+            <i class="fa fa-search" aria-hidden="true"></i>
+        </a>
+        <a href="{% url 'purchase_delete' i.id %}" rel="delete" data-toggle="tooltip" title="Eliminar registro"
+            class="btn btn-danger btn-xs btn-flat">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+        </a>
+    </td>
+</tr>
+{% endfor %}
+{% endblock %}
+
+{% block content_list_before %}
+<div class="modal fade" id="myModalDet" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><b><i class="fa fa-search" aria-hidden="true"></i> Detalle de la compra</b>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#home">Repuestos</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#menu1">Maquinarias</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="home"><br>
+                                    <table width="100%" class="table table-bordered table-md" id="tblRepuests">
+                                        <thead>
+                                            <tr>
+                                                <th>Descripción</th>
+                                                <th>Precio</th>
+                                                <th>Cantidad</th>
+                                                <th>Subtotal</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                                <div class="tab-pane fade" id="menu1"><br>
+                                    <table width="100%" class="table table-bordered table-md" id="tblEquips">
+                                        <thead>
+                                            <tr>
+                                                <th>Descripción</th>
+                                                <th>Serie</th>
+                                                <th>Garantía</th>
+                                                <th>Precio</th>
+                                                <th>Subtotal</th>
+                                                <th>Estado</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

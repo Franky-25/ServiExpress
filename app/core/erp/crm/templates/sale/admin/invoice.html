@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<style>
+    .img-invoice {
+        width: 50px;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .head {
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 13px;
+    }
+
+    #invoice thead tr th {
+        text-align: left;
+        border: 1px solid black;
+        {#border-top: 1px solid black;#}
+        margin-left: 5px;
+        padding-top: 4px;
+    }
+
+
+    #invoice thead tr {
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+
+    #invoice tbody tr {
+        padding: 0;
+    }
+
+    #invoice tbody tr td {
+        border: 1px solid black;
+        margin-left: 5px;
+        padding-top: 3px;
+    }
+
+    .title-det {
+        background-color: black;
+        width: 100%;
+        height: 125px;
+        color: white;
+        text-align: center;
+        text-transform: uppercase;
+        padding-top: 10px;
+    }
+
+    .cab tbody>tr>th {
+        border: 1px solid black;
+    }
+</style>
+
+<body>
+    <img src="{{ comp.get_image }}" class="img-invoice">
+    <p class="head">
+        {{ comp.name|upper }}<br>
+        RUT:{{ comp.rut }}<br>
+        {{ comp.address|upper }}
+    </p>
+
+    <table id="invoice">
+        <tbody>
+            <tr>
+                <td><b>FACTURA:</b></td>
+                <td>{{ sale.nro }}</td>
+                <td><b>FECHA DE VENTA:</b></td>
+                <td>{{ sale.date_joined }}</td>
+            </tr>
+            <tr>
+                <td><b>CLIENTE:</b></td>
+                <td>{{ sale.veh.cli.user.first_name }}</td>
+                <td><b>NÚMERO DE CEDULA:</b></td>
+                <td>{{ sale.veh.cli.user.run }}</td>
+            </tr>
+            <tr>
+                <td><b>VEHICULO/PLACA:</b></td>
+                <td>{{ sale.veh.plaque }}</td>
+                <td><b>MODELO/MARCA:</b></td>
+                <td>{{ sale.veh.exemplar.name }} / {{ sale.veh.exemplar.brand.name }}</td>
+            </tr>
+            <tr>
+                <td><b>TIPO DE SERVICIO:</b></td>
+                <td>{{ sale.type_serv.name }} / {{ sale.type_serv.duration_km  }} KM</td>
+                <td><b>TARIFA:</b></td>
+                <td>{{ sale.type_serv.price }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <h1 class="title-det">REPUESTOS Y HERRAMIENTAS </h1>
+    <table id="invoice">
+        <thead>
+            <tr>
+                <th style="width: 60%;">DESCRIPCIÓN</th>
+                <th style="width: 10%;">CANT</th>
+                <th style="width: 15%;">P.UNITARIO</th>
+                <th style="width: 15%;">TOTAL</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for d in sale.get_repuests.all %}
+            <tr {% if forloop.first %}style="padding-top: 3px;" {% endif %}>
+                <td>{{ d.rec.prod.name }}</td>
+                <td>{{ d.cant }}</td>
+                <td>{{ d.price }}</td>
+                <td>{{ d.total }}</td>
+            </tr>
+            {% endfor %}
+            <tr style="border-top: 1px solid black; padding-top: 2px;">
+                <td colspan="3">SUBTOTAL (REPUESTOS+SERVICIO):</td>
+                <td>{{ sale.subtotal }}</td>
+            </tr>
+            <tr style="padding-top: 0px;">
+                <td colspan="3">IVA 19%:</td>
+                <td>{{ sale.iva }}</td>
+            </tr>
+            <tr style="padding-top: 0px;">
+                <td colspan="3">TOTAL A PAGAR:</td>
+                <td>{{ sale.total }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <h1 class="title-det">MAQUINARIA</h1>
+    <table id="invoice">
+        <thead>
+            <tr>
+                <th style="width: 35%;">DESCRIPCIÓN</th>
+                <th style="width: 15%;">SERIE</th>
+                
+                
+                
+                
+            </tr>
+        </thead>
+        <tbody>
+            {% for d in sale.get_equips.all %}
+            <tr {% if forloop.first %}style="padding-top: 3px;" {% endif %}>
+                <td>{{ d.rec.prod.name }}</td>
+                <td>{{ d.rec.serie }}</td>
+                
+                
+                
+                
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h1 class="title-det">EMPLEADOS</h1>
+    <table id="invoice">
+        <thead>
+            <tr>
+                <th style="width: 20%;">NOMBRES</th>
+                <th style="width: 20%;">APELLIDOS</th>
+                <th style="width: 15%;">CEDULA</th>
+                <th style="width: 15%;">CONTRATO</th>
+                <th style="width: 15%;">CARGO</th>
+                <th style="width: 15%;">COMISIÓN</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for d in sale.detemployees_set.all %}
+            <tr {% if forloop.first %}style="padding-top: 3px;" {% endif %}>
+                <td>{{ d.cont.emp.user.first_name }}</td>
+                <td>{{ d.cont.emp.user.last_name }}</td>
+                <td>{{ d.cont.emp.user.run }}</td>
+                <td>{{ d.cont.get_nro }}</td>
+                <td>{{ d.cont.job.name|upper }}</td>
+                <td>{{ d.bonus }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <table style="margin-top: 50px;">
+        <thead>
+            <tr>
+                <th>****GRACIAS POR SU COMPRA****</th>
+            </tr>
+            <tr>
+                <th>NOSE ACEPTAN CAMBIOS NI DEVOLUCIONES</th>
+            </tr>
+        </thead>
+    </table>
+</body>
+
+</html>

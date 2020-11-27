@@ -1,0 +1,24 @@
+{% extends 'list.html' %}
+{% load static %}
+
+{% block columns %}
+    <th class="text-center">Nro</th>
+    <th>Cliente</th>
+    <th>Vehículo</th>
+    <th>Servicio</th>
+    <th>Fecha de inicio/finalización</th>
+    <th>Comisión</th>
+{% endblock %}
+
+{% block rows %}
+    {% for i in object_list %}
+        <tr>
+            <td>{{ i.sale.nro }}</td>
+            <td>{{ i.sale.veh.cli.user.get_full_name }}</td>
+            <td>{{ i.sale.veh.plaque }}</td>
+            <td>{{ i.sale.type_serv }}</td>
+            <td>{{ i.sale.start_date|date:'c' }} / {{ i.sale.end_date|date:'c' }}</td>
+            <td class="text-center">${{ i.bonus }}</td>
+        </tr>
+    {% endfor %}
+{% endblock %}

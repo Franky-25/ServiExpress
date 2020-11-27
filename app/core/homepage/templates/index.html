@@ -1,0 +1,305 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>{{ title }}</title>
+    <meta content="" name="descriptison">
+    <meta content="" name="keywords">
+    <!-- Favicons -->
+    <link href="{% static 'homepage/img/logo2.png' %}" rel="icon">
+    <link href="{% static 'homepage/img/favicon.png' %}" rel="apple-touch-icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+          rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'homepage/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'homepage/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
+    <link href="{% static 'homepage/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'homepage/vendor/venobox/venobox.css' %}" rel="stylesheet">
+    <link href="{% static 'homepage/vendor/aos/aos.css' %}" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="{% static 'homepage/css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header id="header">
+    <div class="container d-flex">
+
+        <div class="logo mr-auto">
+            <h1 class="text-light"><a href="{% url 'index' %}">{{ comp.name }}<span>.</span></a></h1>
+            <!-- Uncomment below if you prefer to use an image logo -->
+            <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+        </div>
+
+        <nav class="nav-menu d-none d-lg-block">
+            <ul>
+                <li class="active"><a href="#header">Home</a></li>
+                <li><a href="#about">Acerca de nosotros</a></li>
+                <li><a href="#portfolio">Productos</a></li>
+                <li><a href="#contact">Contactos</a></li>
+                <li><a href="{% url 'signin' %}">Registrate</a></li>
+                <li><a href="{% url 'login' %}">Iniciar sesión</a></li>
+            </ul>
+        </nav><!-- .nav-menu -->
+
+    </div>
+</header><!-- End Header -->
+
+<!-- ======= Hero Section ======= -->
+<section id="hero">
+    <div class="container">
+        <div class="row d-flex align-items-center">
+            <div class=" col-lg-6 py-5 py-lg-0 order-2 order-lg-1" data-aos="fade-right">
+                <h1>El mejor servicio para tu vehiculo está en {{ comp.name }}</h1>
+                <h2>Contamos con instalaciones y tecnología de punta. Nuestro equipo está compuesto por jóvenes pero
+                    experimentados profesionales.</h2>
+                <a href="{% url 'signin' %}" class="btn-get-started scrollto">Registrate con nosotros</a>
+            </div>
+
+        </div>
+    </div>
+</section><!-- End Hero -->
+
+<main id="main">
+
+    <!-- ======= Clients Section ======= -->
+    <section id="clients" class="clients section-bg">
+        <div class="container">
+
+            <div class="row no-gutters clients-wrap clearfix wow fadeInUp">
+
+                <div class="col-lg-2 col-md-4 col-6">
+                    <div class="client-logo">
+                        <img src="{% static 'homepage/img/clients/client-1.png' %}" class="img-fluid" alt=""
+                             data-aos="flip-right">
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-4 col-6">
+                    <div class="client-logo">
+                        <img src="{% static 'homepage/img/clients/client-2.png' %}" class="img-fluid" alt=""
+                             data-aos="flip-right"
+                             data-aos-delay="100">
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-4 col-6">
+                    <div class="client-logo">
+                        <img src="{% static 'homepage/img/clients/client-3.png' %}" class="img-fluid" alt=""
+                             data-aos="flip-right"
+                             data-aos-delay="200">
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-4 col-6">
+                    <div class="client-logo">
+                        <img src="{% static 'homepage/img/clients/client-4.png' %}" class="img-fluid" alt=""
+                             data-aos="flip-right"
+                             data-aos-delay="300">
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-4 col-6">
+                    <div class="client-logo">
+                        <img src="{% static 'homepage/img/clients/client-5.png' %}" class="img-fluid" alt=""
+                             data-aos="flip-right"
+                             data-aos-delay="400">
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-4 col-6">
+                    <div class="client-logo">
+                        <img src="{% static 'homepage/img/clients/client-6.png' %}" class="img-fluid" alt=""
+                             data-aos="flip-right"
+                             data-aos-delay="500">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section><!-- End Clients Section -->
+
+    <!-- ======= Features Section ======= -->
+    <section id="features" class="features">
+        <div class="container">
+
+            <div class="section-title">
+                <h2 data-aos="fade-in">Acerca de nosotros</h2>
+                <p data-aos="fade-in">{{ comp.desc }}</p>
+            </div>
+
+            <div class="row content">
+                <div class="col-md-5" data-aos="fade-right">
+                    <img src="{% static 'homepage/img/2.jpg' %}" class="img-fluid" alt="">
+                </div>
+                <div class="col-md-7 pt-4" data-aos="fade-left">
+                    <h3>Taller mecánico automotriz en Santiago</h3>
+                    <p class="font-italic">
+                        {{ comp.mission }}
+                    </p>
+                </div>
+            </div>
+
+            <div class="row content">
+                <div class="col-md-5 order-1 order-md-2" data-aos="fade-left">
+                    <img src="{% static 'homepage/img/4.jpg' %}" class="img-fluid" alt="">
+                </div>
+                <div class="col-md-7 pt-5 order-2 order-md-1" data-aos="fade-right">
+                    <h3>Nuestro taller es fácil de acceso</h3>
+                    <p class="font-italic">
+                        {{ comp.vision }}
+                    </p>
+                </div>
+            </div>
+
+            <div class="row content">
+                <div class="col-md-5" data-aos="fade-right">
+                    <img src="{% static 'homepage/img/6.jpg' %}" class="img-fluid" alt="">
+                </div>
+                <div class="col-md-7 pt-5" data-aos="fade-left">
+                    <h3>De las llantas hasta las parabrisas, reparamos todo</h3>
+                    <p class="font-italic">
+                        {{ comp.about_us }}
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section><!-- End Features Section -->
+
+    <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio section-bg">
+        <div class="container">
+
+            <div class="section-title">
+                <h2 data-aos="fade-in">Nuestros productos</h2>
+                <p data-aos="fade-in">Te ofreces los mejores productos para ti</p>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul id="portfolio-flters">
+                        <li data-filter="*" class="filter-active">All</li>
+                        {% for c in categories %}
+                            <li data-filter=".filter-{{ c.id }}">{{ c.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="row portfolio-container" data-aos="fade-up">
+
+                {% for c in categories %}
+                    {% for p in c.product_set.all %}
+                        <div class="col-lg-4 col-md-6 portfolio-item filter-{{ p.id }}">
+                            <div class="card shadow p-3 mb-5 bg-white rounded">
+                                <img class="card-img-top img-fluid" src="{{ p.get_image }}" alt="Card image cap">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ p.name }}</h5>
+                                    <hr>
+                                    <h2 class="text-center"><span class="badge badge-secondary">${{ p.pvp }}</span></h2>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+
+        </div>
+    </section><!-- End Portfolio Section -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+        <div class="container">
+
+            <div class="section-title">
+                <h2>Contactos</h2>
+                <p>Comunicate con nosotros, estaremos dispuestos ayudarte</p>
+            </div>
+
+            <div class="row">
+
+                <div class="col-lg-12">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="info-box">
+                                <i class="bx bx-map"></i>
+                                <h3>Dirección</h3>
+                                <p>{{ comp.address }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-box mt-4">
+                                <i class="bx bx-envelope"></i>
+                                <h3>Email</h3>
+                                <p>{{ comp.email }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-box mt-4">
+                                <i class="bx bx-phone-call"></i>
+                                <h3>Teléfono</h3>
+                                <p>{{ comp.mobile }} / {{ comp.phone }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section><!-- End Contact Section -->
+
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer">
+
+    <div class="footer-top">
+
+        <div class="container">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <h3>{{ comp.name }}</h3>
+                    <p>{{ comp.desc }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container footer-bottom clearfix">
+        <div class="copyright">
+            &copy; Copyright &copy; {% now "Y" %} <strong><span>{{ comp.name }}</span></strong>. Todos los derechos
+            reservados
+        </div>
+
+    </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="{% static 'homepage/vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'homepage/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'homepage/vendor/jquery.easing/jquery.easing.min.js' %}"></script>
+<script src="{% static 'homepage/vendor/php-email-form/validate.js' %}"></script>
+<script src="{% static 'homepage/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+<script src="{% static 'homepage/vendor/venobox/venobox.min.js' %}"></script>
+<script src="{% static 'homepage/vendor/aos/aos.js' %}"></script>
+
+<!-- Template Main JS File -->
+<script src="{% static 'homepage/js/main.js' %}"></script>
+
+</body>
+
+</html>

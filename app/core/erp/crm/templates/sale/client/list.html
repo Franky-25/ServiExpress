@@ -1,0 +1,125 @@
+{% extends 'list.html' %}
+{% load static %}
+{% block head_list %}
+    <script src="{% static 'sale/client/js/list.js' %}"></script>
+{% endblock %}
+
+{% block columns %}
+    <th class="text-center">Nro</th>
+    <th>Cliente</th>
+    <th>Vehículo</th>
+    <th>Servicio</th>
+    <th>Fecha de inicio/finalización</th>
+    <th>Subtotal</th>
+    <th>Iva</th>
+    <th>Total</th>
+    <th class="text-center">Opciones</th>
+{% endblock %}
+
+{% block rows %}
+    {% for i in object_list %}
+        <tr>
+            <td>{{ i.nro }}</td>
+            <td>{{ i.veh }}</td>
+            <td>{{ i.veh.plaque }}</td>
+            <td>{{ i.type_serv }}</td>
+            <td>{{ i.start_date|date:'c' }} / {{ i.end_date|date:'c' }}</td>
+            <td class="text-center">${{ i.subtotal }}</td>
+            <td class="text-center">${{ i.iva }}</td>
+            <td class="text-center">${{ i.total }}</td>
+            <td class="text-center">
+                <a href="{% url 'sale_print' i.id %}" target="_blank" data-toggle="tooltip" title="Imprimir factura"
+                   class="btn btn-info btn-xs btn-flat">
+                    <i class="fa fa-print"></i>
+                </a>
+                <a rel="details" data-toggle="tooltip" title="Ver detalles" class="btn btn-success btn-xs btn-flat">
+                    <i class="fa fa-search"></i>
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+{% endblock %}
+
+{% block content_list_before %}
+    <div class="modal fade" id="myModalDet" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><b><i class="fa fa-search"></i> Detalle de la venta</b>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <ul class="nav nav-tabs">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#home">Repuestos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#menu1">Maquinarias</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#menu2">Empleados</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane container-fluid active" id="home"><br>
+                                <table width="100%" class="table table-bordered table-md" id="tblRepuests">
+                                    <thead>
+                                    <tr>
+                                        <th>Descripción</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio</th>
+                                        <th>Subtotal</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane container-fluid" id="menu1"><br>
+                                <table width="100%" class="table table-bordered table-md" id="tblEquips">
+                                    <thead>
+                                    <tr>
+                                        <th>Descripción</th>
+                                        <th>Serie</th>
+                                        <th>Garantía</th>
+                                        <th>Precio</th>
+                                        <th>Dep.Diaria</th>
+                                        <th>Días</th>
+                                        <th>Costo</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="tab-pane container-fluid" id="menu2"><br>
+                                <table width="100%" class="table table-bordered table-md" id="tblEmps">
+                                    <thead>
+                                    <tr>
+                                        <th>Nombres</th>
+                                        <th>Apellidos</th>
+                                        <th>Número de cedula</th>
+                                        <th>Contrato</th>
+                                        <th>Cargo</th>
+                                        <th>Comisión</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript_list %}
+
+{% endblock %}

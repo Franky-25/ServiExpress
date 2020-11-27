@@ -1,0 +1,25 @@
+months = (
+    ('', '-----------'),
+    (1, 'Enero'),
+    (2, 'Febrero'),
+    (3, 'Marzo'),
+    (4, 'Abril'),
+    (5, 'Mayo'),
+    (6, 'Junio'),
+    (7, 'Julio'),
+    (8, 'Agosto'),
+    (9, 'Septiembre'),
+    (10, 'Octubre'),
+    (11, 'Noviembre'),
+    (12, 'Diciembre')
+)
+
+type_prod = (
+    ('repuesto_herramienta', 'Repuestos y herramientas'),
+    ('maquinaria', 'Maquinarias'),
+)
+
+type_payment = (
+    ('contado', 'Contado'),
+    ('credito', 'Credito'),
+)

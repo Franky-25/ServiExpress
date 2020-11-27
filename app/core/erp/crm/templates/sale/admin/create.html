@@ -1,0 +1,336 @@
+{% extends 'form.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% block head_form %}
+    <script src="{% static 'lib/select2-4.0.13/js/select2.min.js' %}"></script>
+    <script src="{% static 'lib/select2-4.0.13/js/i18n/es.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'lib/select2-4.0.13/css/select2.min.css' %}">
+    <link rel="stylesheet" href="{% static 'lib/select2-4.0.13/css/select2-bootstrap4.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'lib/bootstrap-touchspin-v4.2.5/css/jquery.bootstrap-touchspin.css' %}"/>
+    <script src="{% static 'lib/bootstrap-touchspin-v4.2.5/js/jquery.bootstrap-touchspin.js' %}"></script>
+
+    <script src="{% static 'lib/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'lib/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css' %}"/>
+
+    <script src="{% static 'lib/daterangepicker-3.1/spanish.js' %}"></script>
+    <script src="{% static 'lib/daterangepicker-3.1/daterangepicker.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'lib/daterangepicker-3.1/daterangepicker.css' %}"/>
+
+    <script src="{% static 'sale/admin/js/form.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <form class="form" method="post" action=".." enctype="multipart/form-data" id="frmSale"
+          data-url="{% url 'sale_list' %}">
+        <div class="card {{ comp.card }}">
+            <div class="card-header">
+                <h3 class="card-title">
+                    {% if action == 'add' %}
+                        <i class="fas fa-plus" aria-hidden="true"></i>
+                    {% else %}
+                        <i class="fas fa-edit" aria-hidden="true"></i>
+                    {% endif %}
+                    {{ title }}
+                </h3>
+            </div>
+            <div class="card-body" style="display: block;">
+                <div class="container-fluid">
+                    {% csrf_token %}
+                    <input type="hidden" id="action" name="action" value="{{ action }}">
+                    <div class="row">
+                        <div class="col-lg-8">
+                            <div class="card card-secondary" style="height: 100vh;">
+                                <div class="card-header">
+                                    <h3 class="card-title"><i class="fas fa-boxes"></i> Recursos</h3>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="nav nav-tabs">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" data-toggle="tab" href="#home">Repuestos y herramienta</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#menu1">Maquinaria</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#menu2">Empleados</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane container-fluid active" id="home">
+                                            <div class="form-group mt-2">
+                                                <label>Búsqueda de repuestos y herramientas :</label>
+                                                <div class="input-group margin">
+                                                    <input type="text" class="form-control" autocomplete="off"
+                                                           name="search_repuests"
+                                                           placeholder="Ingrese el nombre de un repuesto o herramienta">
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-success btn-flat my-group-button btnSearchRepuests"
+                                                                type="button">
+                                                            <i class="fa fa-search" aria-hidden="true"></i>
+                                                        </button>
+                                                        <button class="btn btn-primary btn-flat my-group-button btnClearRepuests"
+                                                                type="button">
+                                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                                        </button>
+                                                        <button type="button"
+                                                                class="btn btn-danger btn-flat btnRemoveAllRepuests">
+                                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <table width="100%" class="table table-bordered table-md" id="tblRepuests">
+                                                <thead>
+                                                <tr>
+                                                    <th style="width: 5%;">Eliminar</th>
+                                                    <th style="width: 20%;">Descripción</th>
+                                                    <th style="width: 15%;">Categoria</th>
+                                                    <th style="width: 15%;">Stock</th>
+                                                    <th style="width: 15%;">Cantidad</th>
+                                                    <th style="width: 15%;">Precio</th>
+                                                    <th style="width: 15%;">Subtotal</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="tab-pane fade" id="menu1">
+                                            <div class="form-group mt-2">
+                                                <label>Búsqueda de maquinaria:</label>
+                                                <div class="input-group margin">
+                                                    <input type="text" class="form-control" autocomplete="off"
+                                                           name="search_equips"
+                                                           placeholder="Ingrese el nombre de una maquinaria">
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-success btn-flat my-group-button btnSearchEquips"
+                                                                type="button">
+                                                            <i class="fa fa-search" aria-hidden="true"></i>
+                                                        </button>
+                                                        <button class="btn btn-primary btn-flat my-group-button btnClearEquips"
+                                                                type="button">
+                                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                                        </button>
+                                                        <button type="button"
+                                                                class="btn btn-danger btn-flat btnRemoveAllEquips">
+                                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <table width="100%" class="table table-bordered table-md" id="tblEquips">
+                                                <thead>
+                                                <tr>
+                                                    <th>Eliminar</th>
+                                                    <th>Descripción</th>
+                                                    <th>Serie</th>
+                                                    <th>Garantía</th>
+                                                    <th>Precio</th>
+                                                    <th>Dep.Diaria</th>
+                                                    <th>Días</th>
+                                                    <th>Costo</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="tab-pane fade" id="menu2">
+                                            <div class="form-group mt-2">
+                                                <label>Búsqueda de empleados:</label>
+                                                <div class="input-group margin">
+                                                    <input type="text" class="form-control" autocomplete="off"
+                                                           name="search_emp"
+                                                           placeholder="Ingrese el nombre de un empleado">
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-primary btn-flat my-group-button btnClearEmps"
+                                                                type="button">
+                                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                                        </button>
+                                                        <button type="button"
+                                                                class="btn btn-danger btn-flat btnRemoveAllEmps">
+                                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <table width="100%" class="table table-bordered table-md" id="tblEmps">
+                                                <thead>
+                                                <tr>
+                                                    <th style="width: 5%;">Eliminar</th>
+                                                    <th style="width: 15%;">Nombres</th>
+                                                    <th style="width: 15%;">Apellidos</th>
+                                                    <th style="width: 20%;">Número de cedula</th>
+                                                    <th style="width: 15%;">Contrato</th>
+                                                    <th style="width: 15%;">Cargo</th>
+                                                    <th style="width: 20%;">Comisión</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card card-secondary">
+                                <div class="card-header">
+                                    <h3 class="card-title"><i class="fas fa-shopping-cart"></i> Datos de la factura</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label class="control-label">Fecha de inicio/finalización:</label>
+                                        {{ form.date_range }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Vehículo:</label>
+                                        {{ form.veh }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Servicio:</label>
+                                        {{ form.type_serv }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Kilometraje actual:</label>
+                                        {{ form.km_current }}
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="form-group">
+                                        <label>SUBTOTAL (REPUESTOS+SERVICIO):</label>
+                                        {{ form.subtotal }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label>IVA:</label>
+                                        {{ form.iva }}
+                                    </div>
+                                    <div class="form-group">
+                                        <label>TOTAL A PAGAR:</label>
+                                        {{ form.total }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-primary btn-flat">
+                    <i class="fas fa-save"></i> Guardar registro
+                </button>
+                <a href="{{ list_url }}" class="btn btn-danger btn-flat">
+                    <i class="fas fa-times"></i> Cancelar
+                </a>
+            </div>
+        </div>
+    </form>
+
+    <div id="myModalAddClient" class="modal fade" role="dialog">
+        <form class="form" id="frmClient" method="POST">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            <b><i class="fa fa-plus" aria-hidden="true"></i> Nuevo registro de un cliente</b>
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            {% for field in frmCli.visible_fields %}
+                                <div class="form-group">
+                                    <label>{{ field.label }}:</label>
+                                    {{ field|add_class:'form-control'|attr:"autocomplete:off" }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary btn-flat btn-block">
+                            <i class="fas fa-save"></i> Guardar registro
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="myModalSearchReps" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <b><i class="fa fa-search" aria-hidden="true"></i> Búsqueda de repuestos y herramientas</b>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <table width="100%" class="table table-bordered table-md" id="tblSearchReps">
+                            <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Pvp</th>
+                                <th>Stock</th>
+                                <th>Agregar</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="myModalSearchEquips" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <b><i class="fa fa-search" aria-hidden="true"></i> Búsqueda de maquinarias</b>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <table width="100%" class="table table-bordered table-md" id="tblSearchEquips">
+                            <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Precio</th>
+                                <th>Serie</th>
+                                <th>Garantía</th>
+                                <th>Depreciación diaria</th>
+                                <th>Agregar</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="application/javascript">
+
+        // starting variables
+        var iva = {{ comp.get_iva }};
+        $(function () {
+            select_typeserv.html('').select2({
+                theme: "bootstrap4",
+                language: 'es',
+                data: {{ typeserv|safe }}
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'list.html' %}
+{% load static  %}
+{% block head_list %}
+    <script src="{% static 'lib/select2-4.0.13/js/select2.min.js' %}"></script>
+    <script src="{% static 'lib/select2-4.0.13/js/i18n/es.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'lib/select2-4.0.13/css/select2.min.css' %}">
+    <link rel="stylesheet" href="{% static 'lib/select2-4.0.13/css/select2-bootstrap4.min.css' %}">
+    <script src="{% static 'lib/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'lib/tempusdominus-bootstrap-4/tempusdominus-bootstrap-4.min.css' %}"/>
+    <script src="{% static 'inventory/js/list.js' %}" type="text/javascript"></script>
+{% endblock %}
+
+{% block content_list_before %}
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label>Producto:</label>
+                {{ form.product }}
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                <label>Compra:</label>
+                {{ form.purchase }}
+            </div>
+        </div>
+    </div>
+    <hr>
+{% endblock %}
+
+{% block columns %}
+    <th>Nro de Compra</th>
+    <th>Fecha de compra</th>
+    <th>Producto</th>
+    <th>Tipo</th>
+    <th>Cantidad/Serie</th>
+    <th>Saldo</th>
+{% endblock %}
+
+{% block box_footer %}
+
+{% endblock %}
